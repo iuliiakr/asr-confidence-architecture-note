@@ -9,4 +9,17 @@ In multilingual voice architectures, confidence is rarely a standardized or comp
 This is <b>not a model benchmark or accuracy comparison</b>.
 The <b>focus is on system behavior and architectural risk</b> when confidence values are used for downstream decisions.
 
+## Pilot Setup
+
+Languages: English (en), Hindi (hi), Ukrainian (uk)
+Speaker: single speaker (constant recording conditions)
+
+Models evaluated:
+- Google Speech-to-Text
+- OpenAI Whisper
+
+Labels: human-judged transcription correctness (binary)
+
+Signals analyzed: model-reported or derived confidence values
+
 

@@ -33,4 +33,41 @@ Observed failure patterns include:
 
 As a result, identical confidence thresholds produce language-dependent behavior.
 
+## Why This Is a System Risk
+
+In production architectures, ASR confidence is commonly used to:
+- auto-accept or reject transcriptions
+- trigger user feedback or corrections
+- route requests to human review
+
+When confidence is treated as a calibrated, language-agnostic signal:
+- errors propagate silently for some languages
+- non-English users receive inconsistent UX
+- system health metrics remain misleadingly “green”
+
+## Architectural Takeaways
+
+### Risky patterns
+- Global confidence thresholds
+- Language-blind routing or feedback logic
+
+### Safer approaches
+- Language-aware thresholds
+- Explicit language and script enforcement
+- Treating confidence as a weak heuristic, not a guarantee
+- Combining confidence with additional validation signals
+
+## Applicability Beyond Tutoring
+
+This risk applies to any multilingual voice system, including:
+- customer support automation
+- voice assistants
+- accessibility tooling
+- language assessment platforms
+
+## Status
+
+This note documents a small, controlled pilot intended to surface architectural risk.
+Future work could explore confidence calibration and downstream decision simulation, but the core insight is already evident.
+
 

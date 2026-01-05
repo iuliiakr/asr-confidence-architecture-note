@@ -1,8 +1,32 @@
 # Multilingual ASR confidence is not a safe decision signal
 
-## Motivation
+## Overview
 
-In multilingual voice architectures, confidence is rarely a standardized or comparable signal across language models. While designing a pronunciation tutoring feedback loop, I observed that applying uniform confidence thresholds across languages led to inconsistent system behavior - triggering false corrections in some languages while missing clear errors in others. This surfaced a broader integration challenge: how to normalize heterogeneous ML confidence signals to deliver a consistent user experience without introducing brittle, per-language logic.
+This artifact highlights a critical integration risk in multilingual speech pipelines: ASR confidence scores are not comparable across languages and models when used as control signals.
+
+In many production architectures, ASR confidence is treated as a standardized metric to gate automation, trigger human review, or control feedback loops. This assumption breaks down in multilingual systems, where identical numeric thresholds produce materially different behavior depending on language, script, and model provider.
+
+This repository presents a small, reproducible evaluation demonstrating how uncalibrated confidence scores destabilize downstream workflows and motivates the need for a Confidence Normalization Layer in global voice architectures.
+
+&nbsp;
+
+## Architectural Context
+
+This issue emerges in multiple common architectures, including:
+
+1. Pronunciation Feedback Loops (Interactive Systems)
+- ASR confidence determines whether learner pronunciation is corrected
+- Miscalibrated confidence leads to false corrections or missed errors
+- Effects are immediate and user-visible
+
+2. TTS Corpus Creation Pipelines (Data Systems)
+- ASR confidence gates automatic acceptance vs. human review
+- Language-dependent confidence skew inflates validation costs
+- Bias introduced at ingestion propagates into training data
+
+Although the downstream systems differ, the architectural risk is the same: confidence is used as a decision signal without normalization across languages.
+
+&nbsp;
 
 ## Scope of This Note
 

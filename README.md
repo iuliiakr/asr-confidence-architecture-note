@@ -22,4 +22,15 @@ Labels: human-judged transcription correctness (binary)
 
 Signals analyzed: model-reported or derived confidence values
 
+## Key Observation
+
+Across models, confidence scores are not consistently aligned with correctness across languages.
+
+Observed failure patterns include:
+- High confidence with incorrect transcription (Hindi, Ukrainian)
+- Low confidence with correct transcription (English)
+- Script confusion with strong internal certainty (Whisper)
+
+As a result, identical confidence thresholds produce language-dependent behavior.
+
 

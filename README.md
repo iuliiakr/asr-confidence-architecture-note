@@ -7,7 +7,6 @@ This repository documents an integration-level risk in multilingual speech pipel
 
 In production systems, confidence is commonly used to gate automation, trigger human review, or drive corrective feedback. In multilingual settings, this assumption leads to non-deterministic behavior.
 
-&nbsp;
 
 ## Architectural Context
 
@@ -25,7 +24,6 @@ This issue emerges in multiple common architectures, including:
 
 Although the downstream systems differ, the architectural risk is the same: confidence is used as a decision signal without normalization across languages.
 
-&nbsp;
 
 ## Observed Divergence
 
@@ -63,18 +61,22 @@ Confidence should be treated as an interface contract, not a raw metric.
 
 ## Appendix: Sample Transcriptions and Confidence Outputs
 
+This pilot is intentionally small and illustrative. It is not intended to measure model accuracy or compare providers.
+Its sole purpose is to demonstrate an integration-level behavior observed when ASR confidence scores are used as control signals in multilingual pipelines.
+
 ### Setup
 
-Languages: English (en), Hindi (hi), Ukrainian (uk)
-Speaker: single speaker (constant recording conditions)
-
-Models evaluated:
+<b>Languages:</b> English (en), Hindi (hi), Ukrainian (uk)
+<b>Utterances:</b> Short, semantically simple commands (3–6 words)
+<b>Speaker:</b> single speaker; consistent recording conditions
+<b>ASR Systems</b>:
 - Google Speech-to-Text
 - OpenAI Whisper
-
-Labels: human-judged transcription correctness (binary)
-
-Signals analyzed: model-reported or derived confidence values
+- Faster-Whisper
+<b>Confidence Signals:</b>
+- Google STT: provider-reported confidence score
+- Whisper / Faster-Whisper: average log probability per segment (used as a confidence proxy)
+<b>Labels:</b> human-judged transcription correctness (binary)
 
 
 

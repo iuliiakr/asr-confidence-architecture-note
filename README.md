@@ -67,15 +67,20 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 ### Setup
 
 <b>Languages:</b> English (en), Hindi (hi), Ukrainian (uk)
+
 <b>Utterances:</b> Short, semantically simple commands (3–6 words)
+
 <b>Speaker:</b> single speaker; consistent recording conditions
+
 <b>ASR Systems</b>:
 - Google Speech-to-Text
 - OpenAI Whisper
 - Faster-Whisper
+
 <b>Confidence Signals:</b>
 - Google STT: provider-reported confidence score
 - Whisper / Faster-Whisper: average log probability per segment (used as a confidence proxy)
+
 <b>Labels:</b> human-judged transcription correctness (binary)
 
 

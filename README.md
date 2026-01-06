@@ -85,13 +85,15 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 ### Sample Outputs (Illustrative Only)
 
-| Language | File | Transcript | Confidence | Correctness (Human) |
+**Google STT**
+
+| Language | File | Transcript | Confidence | Output Correctness (Human) |
 | :--- | :--- | :--- | :--- | :--- |
 | **English** | en-1.wav | I will arrive tomorrow morning. | 0.98 | ✓ Correct |
 | | en-2.wav | Please send me the file. | 0.98 | ✓ Correct |
 | | en-3.wav | Call me in the evening. | 0.90 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.90 | ✗ Wrong (last word) |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.89 | ✓ Correct |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.90 | <span style="color:red">✗ Wrong)</span> |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.89 | <span style="color:red">✗ Wrong</span> |
 | | hi-3.wav | मुझे शाम को फोन करो। | 0.96 | ✓ Correct |
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.92 | ✓ Correct |
 | | uk-2.wav | Будь ласка, надішли мені файл | 0.71 | ✓ Correct |
@@ -99,3 +101,31 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 
 
+**OpenAI's Whisper**
+
+| Language | File | Transcript | Confidence | Output Correctness (Human) |
+| :--- | :--- | :--- | :--- | :--- |
+| **English** | en-1.wav | I will arrive tomorrow morning. | 0.61 | ✓ Correct |
+| | en-2.wav | Please send me the file. | 0.57 | ✓ Correct |
+| | en-3.wav | Call me in the evening. | 0.49 | ✓ Correct |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.44 | ✗ Wrong |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.01 | ✗ Wrong |
+| | hi-3.wav | मुझे शाम को फोन करो। | 0.08 | ✗ Wrong |
+| **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл | 0.60 | ✗ Wrong |
+| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | ✗ Wrong |
+
+
+*Faster-Whisper**
+
+| Language | File | Transcript | Confidence | Output Correctness (Human) |
+| :--- | :--- | :--- | :--- | :--- |
+| **English** | en-1.wav | I will arrive tomorrow morning. | 0.66 | ✓ Correct |
+| | en-2.wav | Please send me the file. | 0.69 | ✓ Correct |
+| | en-3.wav | Call me in the evening. | 0.55 | ✓ Correct |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.46 | ✗ Wrong |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.34 | ✗ Wrong |
+| | hi-3.wav | मुझे शाम को फोन करो। | 0.38 | ✗ Wrong |
+| **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл | 0.57 | ✗ Wrong |
+| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | ✗ Wrong |

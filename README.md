@@ -85,6 +85,8 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 ### Sample Outputs (Illustrative Only)
 
+
+
 **Google STT**
 
 | Language | File | Transcript | Confidence | Output Correctness (Human) |
@@ -108,12 +110,12 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 | **English** | en-1.wav | I will arrive tomorrow morning. | 0.61 | ✓ Correct |
 | | en-2.wav | Please send me the file. | 0.57 | ✓ Correct |
 | | en-3.wav | Call me in the evening. | 0.49 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.44 | ✗ Wrong |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.01 | ✗ Wrong |
-| | hi-3.wav | मुझे शाम को फोन करो। | 0.08 | ✗ Wrong |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.44 | <span style="color:red">✗ Wrong)</span> |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.01 | <span style="color:red">✗ Wrong)</span> |
+| | hi-3.wav | मुझे शाम को फोन करो। | 0.08 | <span style="color:red">✗ Wrong)</span> |
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл | 0.60 | ✗ Wrong |
-| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | ✗ Wrong |
+| | uk-2.wav | Будь ласка, надішли мені файл | 0.60 | <span style="color:red">✗ Wrong)</span> |
+| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | <span style="color:red">✗ Wrong)</span> |
 
 
 *Faster-Whisper**
@@ -123,9 +125,9 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 | **English** | en-1.wav | I will arrive tomorrow morning. | 0.66 | ✓ Correct |
 | | en-2.wav | Please send me the file. | 0.69 | ✓ Correct |
 | | en-3.wav | Call me in the evening. | 0.55 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.46 | ✗ Wrong |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.34 | ✗ Wrong |
-| | hi-3.wav | मुझे शाम को फोन करो। | 0.38 | ✗ Wrong |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.46 | <span style="color:red">✗ Wrong)</span> |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.34 | <span style="color:red">✗ Wrong)</span> |
+| | hi-3.wav | मुझे शाम को फोन करो। | 0.38 | <span style="color:red">✗ Wrong)</span> |
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл | 0.57 | ✗ Wrong |
-| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | ✗ Wrong |
+| | uk-2.wav | Будь ласка, надішли мені файл | 0.57 | <span style="color:red">✗ Wrong)</span> |
+| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | <span style="color:red">✗ Wrong)</span> |

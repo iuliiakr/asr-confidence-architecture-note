@@ -94,40 +94,42 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 | **🇺🇸 English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.98 | ✅ Correct |
 | | en-2.wav | Please send me the file. | Please send me the file. | 0.98 | ✅ Correct |
 | | en-3.wav | Call me in the evening. | Call me in the evening. | 0.90 | ✅ Correct |
-| **🇮🇳 Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | <span style="color: #2ECC71;">**0.90**</span> | ❌ Agreement Error |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे 5 भेज दीजिए। | **<span style="color: green;">0.89</span>** | ❌ Hallucination |
+| **🇮🇳 Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.90 | ❌ Agreement Error |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे 5 भेज दीजिए। | 0.89 | ❌ Hallucination |
 | | hi-3.wav | मुझे शाम को फोन करो। | मुझे शाम को फोन करो! | 0.96 | ✅ Correct |
 | **🇺🇦 Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.92 | ✅ Correct |
 | | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка Надішли мені файл | 0.71 | ⚠️ Formatting Mismatch |
 | | uk-3.wav | Зателефонуй мені ввечері. | зателефонуй мені ввечері | 0.83 | ⚠️ Formatting Mismatch |
 
+&nbsp;
 
 
 ### OpenAI's Whisper
 
+| Lang | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.61 | ✅ Correct |
+| | en-2.wav | Please send me the file. | Please send me the file. | 0.57 | ✅ Correct |
+| | en-3.wav | Call me in the evening. | Call me in the evening. | 0.49 | ✅ Correct |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | کل سوبے پہنچون گئے... | 0.44 | ❌ Wrong script |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | Kripaya MuzefileBedgeDt | 0.30 | ❌ Wrong script, Hallucination |
+| | hi-3.wav | मुझे शाम को फोन करो। | مجھے شام کو فون کرو... | 0.08 | ❌ Wrong script |
+| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.69 | ✅ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл. | Будь ласка на дішли мані файл. | 0.60 | ❌ Hallucination |
+| | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені в вечері. | 0.62 | ⚠️ Formatting Mismatch |
+
+&nbsp;
+
+### Faster-Whisper
+
 | Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | 0.61 | ✓ Correct |
-| | en-2.wav | Please send me the file. | 0.57 | ✓ Correct |
-| | en-3.wav | Call me in the evening. | 0.49 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.44 | <span style="color:red">✗ Wrong)</span> |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.01 | <span style="color:red">✗ Wrong)</span> |
-| | hi-3.wav | मुझे शाम को फोन करो। | 0.08 | <span style="color:red">✗ Wrong)</span> |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл | 0.60 | <span style="color:red">✗ Wrong</span> |
-| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | <span style="color:red">✗ Wrong</span> |
-
-
-*Faster-Whisper**
-
-| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | 0.66 | ✓ Correct |
-| | en-2.wav | Please send me the file. | 0.69 | ✓ Correct |
-| | en-3.wav | Call me in the evening. | 0.55 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.46 | <span style="color:red">✗ Wrong</span> |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.34 | <span style="color:red">✗ Wrong</span> |
-| | hi-3.wav | मुझे शाम को फोन करो। | 0.38 | <span style="color:red">✗ Wrong</span> |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл | 0.57 | <span style="color:red">✗ Wrong</span> |
-| | uk-3.wav | Зателефонуй мені ввечері | 0.62 | <span style="color:red">✗ Wrong</span> |
+| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.66 | ✅ Correct |
+| | en-2.wav | Please send me the file. | Please send me the file. | 0.69 | ✅ Correct |
+| | en-3.wav | Call me in the evening. | Call me into evening. | 0.55 | ❌ Hallucination |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | میں کل سوبے پہ خنچون گئے... | 0.46 | ❌ Wrong script |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | kripaya muze file bhdc | 0.34 | ❌ Wrong script, Hallucination |
+| | hi-3.wav | मुझे शाम को फोन करो। | mujsham kofon karo | 0.38 | ❌ Wrong script, Hallucination |
+| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.69 | ✅ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка на дішли мані файл. | 0.57 | ❌ Hallucination |
+| | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені в вечері. | 0.62 | ⚠️ Formatting Mismatch |

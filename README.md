@@ -27,7 +27,7 @@ Although the downstream systems differ, the architectural risk is the same: conf
 
 ## Observed Divergence
 
-A small evaluation across English, Hindi, and Ukrainian—using Google STT, Whisper, and Faster-Whisper—demonstrates that:
+A small evaluation across English, Hindi, and Ukrainian, using Google STT, Whisper, and Faster-Whisper, demonstrates that:
 - Confidence distributions differ significantly by language for equivalent utterances
 - Incorrect transcriptions may receive higher confidence than correct ones in other languages
 - Model-specific confidence proxies are not aligned
@@ -83,6 +83,21 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 <b>Labels:</b> human-judged transcription correctness (binary)
 
+### Sample Outputs (Illustrative Only)
 
+| File | Transcript | Confidence | Correctness label (human) |
+|------|----------|------------|------------|--------|
+| **ENGLISH** |
+| en-1.wav | I will arrive tomorrow morning. | 0.98 | ✓ Correct |
+| en-2.wav | Please send me the file. | 0.98 | ✓ Correct |
+| en-3.wav | Call me in the evening. | 0.90 | ✓ Correct |
+| **HINDI** |
+| hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.90 | ✓ Correct |
+| hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.89 | ✓ Correct |
+| hi-3.wav | मुझे शाम को फोन करो। | 0.96 | ✓ Correct |
+| **UKRAINIAN** |
+| uk-1.wav | Я приїду завтра вранці | 0.92 | ✓ Correct |
+| uk-2.wav | Будь ласка, надішли мені файл | 0.71 | ✓ Correct |
+| uk-3.wav | Зателефонуй мені ввечері | 0.83 | ✓ Correct |
 
 

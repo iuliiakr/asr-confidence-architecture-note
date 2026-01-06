@@ -83,34 +83,34 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 <b>Labels:</b> human-judged transcription correctness (binary)
 
-### Sample Outputs (Illustrative Only)
+## Sample Outputs (Illustrative Only)
 
 
 
-**Google STT**
+### Google STT
 
-| Language | File | Transcript | Confidence | Output Correctness (Human) |
-| :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | 0.98 | ✓ Correct |
-| | en-2.wav | Please send me the file. | 0.98 | ✓ Correct |
-| | en-3.wav | Call me in the evening. | 0.90 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.90 | <span style="color:red">✗ Wrong</span> |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.89 | <span style="color:red">✗ Wrong</span> |
-| | hi-3.wav | मुझे शाम को फोन करो। | 0.96 | ✓ Correct |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.92 | ✓ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл | 0.71 | ✓ Correct |
-| | uk-3.wav | Зателефонуй мені ввечері | 0.83 | ✓ Correct |
+| Lang | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **🇺🇸 English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.98 | ✅ Correct |
+| | en-2.wav | Please send me the file. | Please send me the file. | 0.98 | ✅ Correct |
+| | en-3.wav | Call me in the evening. | Call me in the evening. | 0.90 | ✅ Correct |
+| **🇮🇳 Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | <span style="color: #2ECC71;">**0.90**</span> | ❌ Agreement Error |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे 5 भेज दीजिए। | **<span style="color: green;">0.89</span>** | ❌ Hallucination |
+| | hi-3.wav | मुझे शाम को फोन करो। | मुझे शाम को फोन करो! | 0.96 | ✅ Correct |
+| **🇺🇦 Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.92 | ✅ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка Надішли мені файл | 0.71 | ⚠️ Formatting Mismatch |
+| | uk-3.wav | Зателефонуй мені ввечері. | зателефонуй мені ввечері | 0.83 | ⚠️ Formatting Mismatch |
 
 
 
-**OpenAI's Whisper**
+### OpenAI's Whisper
 
-| Language | File | Transcript | Confidence | Output Correctness (Human) |
-| :--- | :--- | :--- | :--- | :--- |
+| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **English** | en-1.wav | I will arrive tomorrow morning. | 0.61 | ✓ Correct |
 | | en-2.wav | Please send me the file. | 0.57 | ✓ Correct |
 | | en-3.wav | Call me in the evening. | 0.49 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.44 | <span style="color:red">✗ Wrong)</span> |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.44 | <span style="color:red">✗ Wrong)</span> |
 | | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.01 | <span style="color:red">✗ Wrong)</span> |
 | | hi-3.wav | मुझे शाम को फोन करो। | 0.08 | <span style="color:red">✗ Wrong)</span> |
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |
@@ -120,12 +120,12 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 *Faster-Whisper**
 
-| Language | File | Transcript | Confidence | Output Correctness (Human) |
-| :--- | :--- | :--- | :--- | :--- |
+| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **English** | en-1.wav | I will arrive tomorrow morning. | 0.66 | ✓ Correct |
 | | en-2.wav | Please send me the file. | 0.69 | ✓ Correct |
 | | en-3.wav | Call me in the evening. | 0.55 | ✓ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुंचेंगे। | 0.46 | <span style="color:red">✗ Wrong</span> |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.46 | <span style="color:red">✗ Wrong</span> |
 | | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | 0.34 | <span style="color:red">✗ Wrong</span> |
 | | hi-3.wav | मुझे शाम को फोन करो। | 0.38 | <span style="color:red">✗ Wrong</span> |
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці | 0.69 | ✓ Correct |

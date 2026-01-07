@@ -27,7 +27,7 @@ Although the downstream systems differ, the architectural risk is the same: conf
 
 ## Observed Divergence
 
-A small evaluation across English, Hindi, and Ukrainian, using Google STT, Whisper, and Faster-Whisper, demonstrates that:
+A small evaluation across English, Hindi, and Ukrainian, using Google STT and Whisper, demonstrates that:
 - Confidence distributions differ significantly by language for equivalent utterances
 - Incorrect transcriptions may receive higher confidence than correct ones in other languages
 - Model-specific confidence proxies are not aligned
@@ -75,13 +75,10 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 <b>ASR Systems</b>:
 - Google Speech-to-Text
 - OpenAI Whisper
-- Faster-Whisper
 
 <b>Confidence Signals:</b>
 - Google STT: provider-reported confidence score
-- Whisper / Faster-Whisper: average log probability per segment (used as a confidence proxy)
-
-Confidence values are reported as provided by each system and may reflect different internal definitions (e.g., token-level likelihoods, segment confidence, or heuristic normalization). They should be interpreted within, not across, models.
+- Whisper: average log probability per segment (used as a confidence proxy)
 
 <b>Labels:</b> human-judged transcription correctness (binary)
 
@@ -92,7 +89,9 @@ Confidence values are reported as provided by each system and may reflect differ
 
 ### Google STT
 
-| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+In the samples below, several Hindi transcriptions are assigned high confidence despite semantic or grammatical errors, illustrating that confidence values are not directly comparable across languages.
+
+| Language | File | Human Reference | Model Output (Raw) | Confidence | Human Judgment |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **🇺🇸 English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.98 | ✅ Correct |
 | | en-2.wav | Please send me the file. | Please send me the file. | 0.98 | ✅ Correct |
@@ -100,47 +99,34 @@ Confidence values are reported as provided by each system and may reflect differ
 | **🇮🇳 Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | मैं कल सुबह पहुंचेंगे। | 0.90 | ❌ Agreement Error |
 | | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे 5 भेज दीजिए। | 0.89 | ❌ Hallucination |
 | | hi-3.wav | मुझे शाम को फोन करो। | मुझे शाम को फोन करो! | 0.96 | ✅ Correct |
-| **🇺🇦 Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.92 | ✅ Correct |
+| **🇺🇦 Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.92 | ✅ Correct | 
 | | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка Надішли мені файл | 0.71 | ⚠️ Formatting Mismatch |
 | | uk-3.wav | Зателефонуй мені ввечері. | зателефонуй мені ввечері | 0.83 | ⚠️ Formatting Mismatch |
 
 &nbsp;
 
 
-### OpenAI's Whisper
+### OpenAI's Whisper (large-v3)
 
-| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+Whisper does not expose an explicit confidence score. The avg_logprob shown below is Whisper’s average token log-probability for the decoded output and is commonly used as a proxy for internal model confidence. The examples illustrate that similar or higher log-probability values may correspond to both correct and incorrect transcriptions, depending on language and linguistic features.
+
+| Language | File | Human Reference | Model Output (Raw) | avg_logprob | Human Judgment |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.61 | ✅ Correct |
-| | en-2.wav | Please send me the file. | Please send me the file. | 0.57 | ✅ Correct |
-| | en-3.wav | Call me in the evening. | Call me in the evening. | 0.49 | ✅ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | کل سوبے پہنچون گئے... | 0.44 | ❌ Wrong script |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | Kripaya MuzefileBedgeDt | 0.30 | ❌ Wrong script, Hallucination |
-| | hi-3.wav | मुझे शाम को फोन करो। | مجھے شام کو فون کرو... | 0.08 | ❌ Wrong script |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.69 | ✅ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл. | Будь ласка на дішли мані файл. | 0.60 | ❌ Hallucination |
-| | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені в вечері. | 0.62 | ⚠️ Formatting Mismatch |
+| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | -0.18 | ✅ Correct |
+| | en-2.wav | Please send me the file. | Please send me the file. | -0.35 | ✅ Correct |
+| | en-3.wav | Call me in the evening. | Call me in the evening. | -0.49 | ✅ Correct |
+| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | में कल सुबे पखुचुंगी | -0.22 | ❌ 1 phonetic error |
+| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे फाइल भेज दीचिये  | -0.15 | ❌ 1 phonetic error |
+| | hi-3.wav | मुझे शाम को फोन करो। | मुझे शाम को फोन करो | -0.11 | ✅ Correct |
+| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | -0.15 | ✅ Correct |
+| | uk-2.wav | Будь ласка, надішли мені файл. | Будь ласка, на дешлий маніфайл. | -0.17 | ❌ Hallucination |
+| | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені ввечері. | -0.11 | ✅ Correct |
+
+
 
 &nbsp;
-
-### Faster-Whisper
-
-| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.66 | ✅ Correct |
-| | en-2.wav | Please send me the file. | Please send me the file. | 0.69 | ✅ Correct |
-| | en-3.wav | Call me in the evening. | Call me into evening. | 0.55 | ❌ Hallucination |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | میں کل سوبے پہ خنچون گئے... | 0.46 | ❌ Wrong script |
-| | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | kripaya muze file bhdc | 0.34 | ❌ Wrong script, Hallucination |
-| | hi-3.wav | मुझे शाम को फोन करो। | mujsham kofon karo | 0.38 | ❌ Wrong script, Hallucination |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.69 | ✅ Correct |
-| | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка на дішли мані файл. | 0.57 | ❌ Hallucination |
-| | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені в вечері. | 0.62 | ⚠️ Formatting Mismatch |
-
-&nbsp;
-Correctness labels reflect comparison between the raw model output and the human reference transcript:
+Human Judgment - these correctness labels reflect comparison between the raw model output and the human reference transcript:
 ✅ Correct: Semantically and grammatically equivalent
 ⚠️ Formatting Mismatch: Punctuation, casing, or spacing differences without semantic impact
 ❌ Agreement Error: Grammatical error affecting correctness
 ❌ Hallucination: Lexical insertion, substitution, or meaning change
-❌ Wrong script: Output rendered in an incorrect writing system for the target language

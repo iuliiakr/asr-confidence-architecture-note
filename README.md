@@ -112,13 +112,13 @@ Whisper does not expose an explicit confidence score. The avg_logprob shown belo
 
 | Language | File | Human Reference | Model Output (Raw) | avg_logprob | Human Judgment |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | -0.18 | ✅ Correct |
+| **🇺🇸 English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | -0.18 | ✅ Correct |
 | | en-2.wav | Please send me the file. | Please send me the file. | -0.35 | ✅ Correct |
 | | en-3.wav | Call me in the evening. | Call me in the evening. | -0.49 | ✅ Correct |
-| **Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | में कल सुबे पखुचुंगी | -0.22 | ❌ 1 phonetic error |
+| **🇮🇳 Hindi** | hi-1.wav | मैं कल सुबह पहुँचूँगी। | में कल सुबे पखुचुंगी | -0.22 | ❌ 1 phonetic error |
 | | hi-2.wav | कृपया मुझे फ़ाइल भेज दीजिए। | कृपया मुझे फाइल भेज दीचिये  | -0.15 | ❌ 1 phonetic error |
 | | hi-3.wav | मुझे शाम को फोन करो। | मुझे शाम को फोन करो | -0.11 | ✅ Correct |
-| **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | -0.15 | ✅ Correct |
+| **🇺🇦 Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | -0.15 | ✅ Correct |
 | | uk-2.wav | Будь ласка, надішли мені файл. | Будь ласка, на дешлий маніфайл. | -0.17 | ❌ Hallucination |
 | | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені ввечері. | -0.11 | ✅ Correct |
 
@@ -126,7 +126,7 @@ Whisper does not expose an explicit confidence score. The avg_logprob shown belo
 
 &nbsp;
 Human Judgment - these correctness labels reflect comparison between the raw model output and the human reference transcript:
-✅ Correct: Semantically and grammatically equivalent
-⚠️ Formatting Mismatch: Punctuation, casing, or spacing differences without semantic impact
-❌ Agreement Error: Grammatical error affecting correctness
-❌ Hallucination: Lexical insertion, substitution, or meaning change
+- ✅ Correct: Semantically and grammatically equivalent
+- ⚠️ Formatting Mismatch: Punctuation, casing, or spacing differences without semantic impact
+- ❌ Agreement Error: Grammatical error affecting correctness
+- ❌ Hallucination: Lexical insertion, substitution, or meaning change

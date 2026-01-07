@@ -81,15 +81,18 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 - Google STT: provider-reported confidence score
 - Whisper / Faster-Whisper: average log probability per segment (used as a confidence proxy)
 
+Confidence values are reported as provided by each system and may reflect different internal definitions (e.g., token-level likelihoods, segment confidence, or heuristic normalization). They should be interpreted within, not across, models.
+
 <b>Labels:</b> human-judged transcription correctness (binary)
+
+&nbsp;
 
 ## Sample Outputs (Illustrative Only)
 
 
-
 ### Google STT
 
-| Lang | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **🇺🇸 English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.98 | ✅ Correct |
 | | en-2.wav | Please send me the file. | Please send me the file. | 0.98 | ✅ Correct |
@@ -106,7 +109,7 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 
 ### OpenAI's Whisper
 
-| Lang | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
+| Language | File | Human Reference | Model Output (Raw) | Confidence | Correct? |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **English** | en-1.wav | I will arrive tomorrow morning. | I will arrive tomorrow morning. | 0.61 | ✅ Correct |
 | | en-2.wav | Please send me the file. | Please send me the file. | 0.57 | ✅ Correct |
@@ -133,3 +136,11 @@ Its sole purpose is to demonstrate an integration-level behavior observed when A
 | **Ukrainian** | uk-1.wav | Я приїду завтра вранці. | Я приїду завтра вранці. | 0.69 | ✅ Correct |
 | | uk-2.wav | Будь ласка, надішли мені файл. | будь ласка на дішли мані файл. | 0.57 | ❌ Hallucination |
 | | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені в вечері. | 0.62 | ⚠️ Formatting Mismatch |
+
+&nbsp;
+Correctness labels reflect comparison between the raw model output and the human reference transcript:
+✅ Correct: Semantically and grammatically equivalent
+⚠️ Formatting Mismatch: Punctuation, casing, or spacing differences without semantic impact
+❌ Agreement Error: Grammatical error affecting correctness
+❌ Hallucination: Lexical insertion, substitution, or meaning change
+❌ Wrong script: Output rendered in an incorrect writing system for the target language

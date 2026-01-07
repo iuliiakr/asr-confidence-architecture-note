@@ -120,10 +120,9 @@ Whisper does not expose an explicit confidence score. The avg_logprob shown belo
 | | uk-3.wav | Зателефонуй мені ввечері. | Зателефонуй мені ввечері. | -0.11 | ✅ Correct |
 
 
-
-&nbsp;
 Human Judgment - these correctness labels reflect comparison between the raw model output and the human reference transcript:
 - ✅ Correct: Semantically and grammatically equivalent
 - ⚠️ Formatting Mismatch: Punctuation, casing, or spacing differences without semantic impact
 - ❌ Agreement Error: Grammatical error affecting correctness
 - ❌ Hallucination: Lexical insertion, substitution, or meaning change
+&nbsp;

@@ -50,16 +50,9 @@ The failure mode is architectural, not model-specific.
 
 ## Architectural Implication
 
-In multilingual speech systems, ASR confidence cannot be treated as a portable decision signal.
+Raw confidence values encode provider- and language-specific semantics and cannot be consumed directly as decision signals without introducing non-deterministic system behavior.
 
-Raw confidence scores embed language-, model-, and provider-specific semantics. When consumed directly by downstream components, these semantics leak across system boundaries and produce non-deterministic behavior at the application level.
-
-To remain stable at scale, multilingual architectures require an explicit Confidence Normalization boundary that:
-- decouples downstream logic from provider-specific confidence semantics,
-- calibrates reliability per language and model,
-- and maps raw scores into task-appropriate decision bands.
-
-Confidence should be treated as an interface contract, not an implementation detail.
+Multilingual pipelines therefore require an explicit normalization boundary that translates model-specific confidence into task-level reliability guarantees.
 
 &nbsp;
 

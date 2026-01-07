@@ -50,12 +50,16 @@ The failure mode is architectural, not model-specific.
 
 ## Architectural Implication
 
-Multilingual speech systems require an explicit <b>Confidence Normalization Layer</b> that:
-- calibrates confidence per language and model,
-- maps raw scores to task-specific reliability bands,
-- and prevents provider-specific semantics from leaking across system boundaries.
+In multilingual speech systems, ASR confidence cannot be treated as a portable decision signal.
 
-Confidence should be treated as an interface contract, not a raw metric.
+Raw confidence scores embed language-, model-, and provider-specific semantics. When consumed directly by downstream components, these semantics leak across system boundaries and produce non-deterministic behavior at the application level.
+
+To remain stable at scale, multilingual architectures require an explicit Confidence Normalization boundary that:
+- decouples downstream logic from provider-specific confidence semantics,
+- calibrates reliability per language and model,
+- and maps raw scores into task-appropriate decision bands.
+
+Confidence should be treated as an interface contract, not an implementation detail.
 
 &nbsp;
 
